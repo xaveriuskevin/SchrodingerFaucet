@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.7.6;
+pragma solidity 0.8.21;
 pragma abicoder v2;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -11,9 +11,9 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 error EmptyTokenInput();
 error InvalidAmount();
 error UnableMint();
-error UnsufficientBalance();
+error InsufficientBalance();
 
-contract SchrodingerFaucet is Ownable {
+contract EsperFaucet is Ownable {
   using SafeERC20 for IERC20;
 
 
@@ -32,8 +32,6 @@ contract SchrodingerFaucet is Ownable {
   mapping(address => uint256) public userCooldown; 
 
   uint256 private rangeMintTime = 1 days;
-
-  constructor()Ownable(msg.sender){}
 
   /**************************************************/
   /****************** PUBLIC VIEWS ******************/
@@ -71,13 +69,15 @@ contract SchrodingerFaucet is Ownable {
   function claim() external {
     
     if(_tokens.length == 0) revert EmptyTokenInput();
-    if(block.timestamp - userCooldown[msg.sender] < rangeMintTime) revert UnableMint();
+    if(userCooldown[msg.sender] != 0){
+      if(block.timestamp - userCooldown[msg.sender] < rangeMintTime) revert UnableMint();
+    }
 
     for(uint256 i; i < _tokens.length; i++){
       //Check Balance of Token
       uint256 existingTokenBalance = IERC20(_tokens[i].token).balanceOf(address(this));
       //Compare existing token balance with required amount
-      if(existingTokenBalance < _tokens[i].amount) revert UnsufficientBalance();
+      if(existingTokenBalance < _tokens[i].amount) revert InsufficientBalance();
 
       IERC20(_tokens[i].token).safeTransfer(msg.sender, _tokens[i].amount);
     }
@@ -106,7 +106,7 @@ contract SchrodingerFaucet is Ownable {
   function addTokens(address token , uint256 amount , uint8 decimal) external onlyOwner {
     if(amount == 0) revert InvalidAmount();
     TokenInfo memory newToken = TokenInfo(token,amount,decimal);
-    _tokens[_tokens.length] = newToken;
+    _tokens.push(newToken);
   }
 
   /**
