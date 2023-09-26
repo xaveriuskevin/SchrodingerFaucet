@@ -342,11 +342,11 @@
 			]
 		},
 		"src\\EsperFaucet.sol": {
-			"keccak256": "0x1330f9a237231664497948b0d217e5287fa0be5dfee41280241304dbdc953dbe",
+			"keccak256": "0xe06437103c6bdb5eca3760f84546180390ed4acafafe9da19a0134c53aae128b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7d85de5063ed64845f55ae9a449ce40b8d960168a2af9dc1db8f161e42b427be",
-				"dweb:/ipfs/QmZEavbztmpLpit1am21AuxVXVRfk1S7qSuRfAdwiecB4G"
+				"bzz-raw://ec982f79effcfdddbd88db43dc0c218087bcaf57aa872ff1a3b94ed26ac27c5b",
+				"dweb:/ipfs/QmSwQ4MMgvUzpdrSyX8tntwFXqPBjC2mkYcC6VgsecbncF"
 			]
 		}
 	},

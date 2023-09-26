@@ -33,6 +33,8 @@ contract EsperFaucet is Ownable {
 
   uint256 private rangeMintTime = 1 days;
 
+  // constructor()Ownable(msg.sender){}
+  
   /**************************************************/
   /****************** PUBLIC VIEWS ******************/
   /**************************************************/
