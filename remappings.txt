@@ -1,2 +1,3 @@
-@prb/test/=lib/prb-test/src/
-forge-std/=lib/forge-std/src/
+@prb/test/=lib/prb-test/prb-test/src/
+forge-std/=lib/forge-std/forge-std/src/
+@openzeppelin=lib/openzeppelin-contracts/
